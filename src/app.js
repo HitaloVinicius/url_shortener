@@ -12,13 +12,16 @@ const server = express();
 const http = require('http').createServer(server);
 
 const userRouter = require('./routes/user');
+const authRouter = require('./routes/authentication');
 
-server.use(logger('dev'));
+if (process.env.NODE_ENV === 'development') server.use(logger('dev'));
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(cookieParser());
 server.use(cors(corsConfig));
 
 server.use('/user', userRouter);
+server.use('/auth', authRouter);
+
 
 module.exports = http;
