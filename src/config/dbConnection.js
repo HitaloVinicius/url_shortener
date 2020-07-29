@@ -6,7 +6,7 @@ const connection = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.
     dialect: dbConfig.dialect,
     define: dbConfig.define,
     logging: dbConfig.logging,
-    timezone: dbConfig.timezone
+    timezone: dbConfig.timezone,
 
 });
 

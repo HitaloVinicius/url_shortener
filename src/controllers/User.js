@@ -1,7 +1,8 @@
+const { v4: uuidv4 } = require('uuid');
+
 const UserModel = require('../models/User');
 const { userSchema } = require('../validators');
 const encode = require('../utils/encode');
-const uuidv4 = require('uuid').v4;
 
 
 module.exports = {
@@ -9,29 +10,33 @@ module.exports = {
     async create(req, res) {
         try {
 
-            if (userSchema.store.validate(req.body).error) throw { code: 403 }
+            if (userSchema.store.validate(req.body).error) {
+                throw { code: 403 };
+            };
 
             const { name, username, password } = req.body;
 
             const userExists = await UserModel.findOne({
                 where: {
-                    username
-                }
-            })
+                    username,
+                },
+            });
 
-            if (userExists) throw { code: 409 }
+            if (userExists) {
+                throw { code: 409 };
+            };
 
             await UserModel.create({
                 id: uuidv4(),
                 name,
                 username,
-                password: encode(password)
-            })
+                password: encode(password),
+            });
 
-            return res.status(200).json({})
+            return res.status(200).json({});
 
         } catch (error) {
-            return res.status(error.code || 500).json({})
+            return res.status(error.code || 500).json({});
         }
     }
 

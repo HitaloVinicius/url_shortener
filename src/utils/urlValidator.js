@@ -6,6 +6,8 @@ const pattern = new RegExp('^(https?:\\/\\/)?' +
     '(\\#[-a-z\\d_]*)?$', 'i');
 
 module.exports = (url) => {
-    if (!url) return false
-    return pattern.test(url)
+    if (!url) {
+        return false;
+    };
+    return pattern.test(url);
 }
