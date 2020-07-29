@@ -1,6 +1,6 @@
 # URL Shortener
 
- A aplicação trata-se de uma API REST e como objetivo receber URLs de usuários autenticados e gerar URLs encurtadas, cada URL encurtada pode ser acessado de forma pública, porém as estatísticas da URL só podem ser acessadas pelo usuário responsável pela sua criação.
+ A aplicação trata-se de uma API REST que tem como objetivo receber URLs de usuários autenticados e gerar URLs encurtadas. Cada URL encurtada pode ser acessado de forma pública, porém as estatísticas da URL só podem ser acessadas pelo usuário responsável pela sua criação.
 
 ## Variáveis de ambiente
 
@@ -8,7 +8,7 @@ Antes de executar a API, você precisa configurar o arquivo `.env`. Use o exempl
 
 Você pode copiá-lo executando o seguinte comando no diretório raiz deste projeto:
 
-```sh
+```
 $ cp .env.example .env
 ```
 
@@ -24,12 +24,12 @@ $ yarn
 
 ## Executando migrations
 
-Depois de instalar todas as dependências, antes de iniciar o servidor, é necessário executar algumas migrações para criar os esquemas do banco de dados.
+Depois de instalar todas as dependências, antes de iniciar o servidor, é necessário executar algumas migrations para criar os esquemas do banco de dados.
 
 Você pode fazer isso executando:
 
 ```
-$ yarn sequelize db: migrate
+$ yarn sequelize db:migrate
 ```
 
 Se você precisar reverter as alterações, execute o seguinte comando:
