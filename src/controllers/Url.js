@@ -6,7 +6,6 @@ module.exports = {
 
     async filter(req, res) {
         try {
-
             const url = await UrlModel.findByPk(req.params.id)
 
             if (!url) throw { code: 404, message: 'URL not found' }
@@ -27,6 +26,37 @@ module.exports = {
                     short: `${process.env.SHORT_DOMAIN}/${url.id}`
                 }
             })
+        } catch (error) {
+            return res.status(error.code || 500).json(error)
+        }
+    },
+
+    async stats(req, res) {
+        try {
+            const user = req.user
+
+            const url = await UrlModel.findOne({
+                where: {
+                    id: req.params.id,
+                    user_id: user.id
+                }
+            })
+
+            if (!url) throw { code: 404, message: 'URL not found' }
+
+            res.status(200).json({
+                info: {
+                    url: {
+                        original: url.original,
+                        short: `${process.env.SHORT_DOMAIN}/${url.id}`
+                    },
+                    createdAt: url.createdAt,
+                    lastAccess: url.updatedAt,
+                    stats: {
+                        clicks: url.clicks
+                    }
+                }
+            });
         } catch (error) {
             return res.status(error.code || 500).json(error)
         }
