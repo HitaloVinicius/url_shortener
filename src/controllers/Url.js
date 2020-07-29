@@ -21,9 +21,14 @@ module.exports = {
                     }
                 })
 
-            return res.status(200).json(url)
+            return res.status(200).json({
+                url: {
+                    original: url.original,
+                    short: `${process.env.SHORT_DOMAIN}/${url.id}`
+                }
+            })
         } catch (error) {
-            return res.status(500).json(error)
+            return res.status(error.code || 500).json(error)
         }
     },
 
