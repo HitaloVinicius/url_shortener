@@ -19,13 +19,12 @@ module.exports = {
 
             if (!user) throw { code: 404 }
 
-            const auth = jwt.sign({ name: user.name }, process.env.SECRET_TOKEN);
+            const auth = jwt.sign({ name: user.name, id: user.id }, process.env.SECRET_TOKEN);
 
             return res
                 .status(200)
                 .cookie('auth', auth)
                 .json({ auth });
-
 
         } catch (error) {
             return res.status(error.code || 500).json(error)
